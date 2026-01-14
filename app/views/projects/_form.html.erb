@@ -18,8 +18,8 @@
 
   <div>
     <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
-  </div>
+    <%= form.select :status, Project.statuses.keys.map { |k| [k, k] }, {}, {} %>
+  </div> 
 
   <div>
     <%= form.label :note, style: "display: block" %>
