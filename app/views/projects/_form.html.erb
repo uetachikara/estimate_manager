@@ -28,8 +28,9 @@
 
   <div>
     <%= form.label :client_id, style: "display: block" %>
-    <%= form.text_field :client_id %>
+    <%= form.collection_select :client_id, @clients, :id, :name, prompt: "選択してください" %>
   </div>
+
 
   <div>
     <%= form.label :user_id, style: "display: block" %>

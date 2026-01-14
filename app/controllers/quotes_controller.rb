@@ -3,7 +3,7 @@ class QuotesController < ApplicationController
 
   # GET /quotes or /quotes.json
   def index
-    @quotes = Quote.all
+    @quotes = current_user.quotes.includes(:project).order(created_at: :desc)
   end
 
   # GET /quotes/1 or /quotes/1.json
@@ -12,11 +12,13 @@ class QuotesController < ApplicationController
 
   # GET /quotes/new
   def new
-    @quote = Quote.new
+    @quote = current_user.quotes.new
+    @projects = current_user.projects
   end
 
   # GET /quotes/1/edit
   def edit
+    @projects = current_user.projects
   end
 
   # POST /quotes or /quotes.json
@@ -60,6 +62,6 @@ class QuotesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def quote_params
-      params.require(:quote).permit(:status, :subtotal, :issued_on, :note, :project_id)
+      @quote = current_user.quotes.find(params.expect(:id))
     end
 end
