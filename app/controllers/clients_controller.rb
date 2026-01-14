@@ -3,7 +3,7 @@ class ClientsController < ApplicationController
 
   # GET /clients or /clients.json
   def index
-    @clients = Client.all
+    @clients = current_user.clients.order(created_at: :desc)
   end
 
   # GET /clients/1 or /clients/1.json
@@ -12,7 +12,7 @@ class ClientsController < ApplicationController
 
   # GET /clients/new
   def new
-    @client = Client.new
+    @client = current_user.clients.new
   end
 
   # GET /clients/1/edit
@@ -21,7 +21,7 @@ class ClientsController < ApplicationController
 
   # POST /clients or /clients.json
   def create
-    @client = Client.new(client_params)
+    @client = current_user.clients.new(client_params)
 
     respond_to do |format|
       if @client.save
@@ -60,7 +60,7 @@ class ClientsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_client
-      @client = Client.find(params.expect(:id))
+      @client = current_user.clients.find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.
