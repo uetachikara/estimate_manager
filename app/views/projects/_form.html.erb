@@ -19,10 +19,11 @@
   <div class="mb-3">
     <%= form.label :status, "ステータス", class: "form-label" %>
     <%= form.select :status,
-      Project.statuses.keys.map { |k| [Project.human_attribute_name("statuses.#{k}"), k] },
-      {},
-      class: "form-select" %>
+        Project.statuses.keys.map { |k| [I18n.t("activerecord.attributes.project.statuses.#{k}"), k] },
+        {},
+        class: "form-select" %>
   </div>
+
 
   <div class="mb-3">
     <%= form.label :note, "メモ", class: "form-label" %>

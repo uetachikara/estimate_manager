@@ -14,9 +14,9 @@
   <div class="mb-3">
     <%= form.label :status, "ステータス", class: "form-label" %>
     <%= form.select :status,
-      Quote.statuses.keys.map { |k| [Quote.human_attribute_name("statuses.#{k}"), k] },
-      {},
-      class: "form-select" %>
+        Quote.statuses.keys.map { |k| [I18n.t("activerecord.attributes.quote.statuses.#{k}"), k] },
+        {},
+        class: "form-select" %>
   </div>
 
   <div class="mb-3">
