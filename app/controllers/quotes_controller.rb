@@ -20,7 +20,7 @@ class QuotesController < ApplicationController
   def create
     @quote = current_user.quotes.new(quote_params)
     if @quote.save
-      redirect_to @quote, notice: "Quote was successfully created."
+      redirect_to @quote, notice: t("notices.quote.created")
     else
       @projects = current_user.projects
       render :new, status: :unprocessable_entity
@@ -29,7 +29,7 @@ class QuotesController < ApplicationController
 
   def update
     if @quote.update(quote_params)
-      redirect_to @quote, notice: "Quote was successfully updated.", status: :see_other
+      redirect_to @quote, notice: t("notices.quote.updated"), status: :see_other
     else
       @projects = current_user.projects
       render :edit, status: :unprocessable_entity
@@ -38,7 +38,7 @@ class QuotesController < ApplicationController
 
   def destroy
     @quote.destroy!
-    redirect_to quotes_path, notice: "Quote was successfully destroyed.", status: :see_other
+    redirect_to quotes_path, notice: t("notices.quote.destroyed"), status: :see_other
   end
 
   private

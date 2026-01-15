@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
   def create
     @project = current_user.projects.new(project_params)
     if @project.save
-      redirect_to @project, notice: "Project was successfully created."
+      redirect_to @project, notice: t("notices.project.created")
     else
       render :new, status: :unprocessable_entity
     end
@@ -35,7 +35,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to @project, notice: "Project was successfully updated.", status: :see_other }
+        format.html { redirect_to @project, notice: t("notices.project.updated"), status: :see_other }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -49,7 +49,7 @@ class ProjectsController < ApplicationController
     @project.destroy!
 
     respond_to do |format|
-      format.html { redirect_to projects_path, notice: "Project was successfully destroyed.", status: :see_other }
+      format.html { redirect_to projects_path, notice: t("notices.project.destroyed"), status: :see_other }
       format.json { head :no_content }
     end
   end
