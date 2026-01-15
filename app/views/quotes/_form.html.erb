@@ -11,34 +11,36 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.select :status,
-        Quote.statuses.keys.map { |k| [k, k] },
-        {}, {} %>
+  <div class="mb-3">
+    <%= form.label :status, "ステータス", class: "form-label" %>
+    <%= form.text_field :status, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :subtotal, style: "display: block" %>
-    <%= form.text_field :subtotal %>
+  <div class="mb-3">
+    <%= form.label :subtotal, "小計（円）", class: "form-label" %>
+    <%= form.number_field :subtotal, class: "form-control", min: 0, step: 1 %>
   </div>
 
-  <div>
-    <%= form.label :issued_on, style: "display: block" %>
-    <%= form.date_field :issued_on %>
+  <div class="mb-3">
+    <%= form.label :issued_on, "発行日", class: "form-label" %>
+    <%= form.date_field :issued_on, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :note, style: "display: block" %>
-    <%= form.text_field :note %>
+  <div class="mb-3">
+    <%= form.label :note, "備考", class: "form-label" %>
+    <%= form.text_area :note, class: "form-control", rows: 3 %>
   </div>
 
-  <div>
-    <%= form.label :project_id, style: "display: block" %>
-    <%= form.collection_select :project_id, @projects, :id, :name, prompt: "選択してください" %>
+  <div class="mb-3">
+    <%= form.label :project_id, "案件", class: "form-label" %>
+    <%= form.collection_select :project_id, @projects, :id, :name,
+        { prompt: "選択してください" },
+        { class: "form-select" } %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="d-flex gap-2">
+    <%= form.submit "保存", class: "btn btn-primary" %>
+    <%= link_to "戻る", quotes_path, class: "btn btn-outline-secondary" %>
   </div>
+
 <% end %>

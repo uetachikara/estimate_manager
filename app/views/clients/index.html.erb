@@ -1,16 +1,30 @@
-<p style="color: green"><%= notice %></p>
-
-<% content_for :title, "Clients" %>
-
-<h1>Clients</h1>
-
-<div id="clients">
-  <% @clients.each do |client| %>
-    <%= render client %>
-    <p>
-      <%= link_to "Show this client", client %>
-    </p>
-  <% end %>
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h1 class="h4 mb-0">取引先一覧</h1>
+  <%= link_to "新規登録", new_client_path, class: "btn btn-primary" %>
 </div>
 
-<%= link_to "New client", new_client_path %>
+<table class="table table-striped table-hover align-middle">
+  <thead>
+    <tr>
+      <th>取引先名</th>
+      <th>担当者</th>
+      <th>電話</th>
+      <th>メール</th>
+      <th class="text-end"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @clients.each do |c| %>
+      <tr>
+        <td><%= link_to c.name, c, class: "text-decoration-none" %></td>
+        <td><%= c.contact_name %></td>
+        <td><%= c.phone %></td>
+        <td><%= c.email %></td>
+        <td class="text-end">
+          <%= link_to "編集", edit_client_path(c), class: "btn btn-sm btn-outline-secondary" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
