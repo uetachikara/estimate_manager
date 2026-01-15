@@ -34,10 +34,11 @@
           <%= link_to "案件", projects_path, class: "btn btn-outline-primary btn-sm" %>
           <%= link_to "見積", quotes_path, class: "btn btn-outline-primary btn-sm" %>
 
-          <%= link_to "ログアウト",
-              destroy_user_session_path,
-              data: { turbo_method: :delete },
-              class: "btn btn-outline-secondary btn-sm" %>
+          <%= button_to "ログアウト",
+            destroy_user_session_path,
+            method: :delete,
+            class: "btn btn-outline-secondary btn-sm" %>
+
         <% else %>
           <%= link_to "ログイン", new_user_session_path, class: "btn btn-primary btn-sm" %>
         <% end %>

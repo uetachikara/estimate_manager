@@ -19,7 +19,7 @@
       <tr>
         <td><%= link_to q.quote_no, q, class: "text-decoration-none" %></td>
         <td><%= q.project&.name %></td>
-        <td><%= q.status %></td>
+        <td><%= q.status_i18n %></td>
         <td class="text-end"><%= q.total %></td>
         <td class="text-end">
           <%= link_to "編集", edit_quote_path(q), class: "btn btn-sm btn-outline-secondary" %>

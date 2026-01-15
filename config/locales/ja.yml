@@ -15,6 +15,10 @@ ja:
         status: ステータス
         note: メモ
         client: 取引先
+        statuses:
+          lead: "リード"
+          active: "進行中"
+          closed: "完了"
       quote:
         quote_no: 見積番号
         status: ステータス
@@ -24,6 +28,11 @@ ja:
         issued_on: 発行日
         note: 備考
         project: 案件
+        statuses:
+          draft: "下書き"
+          sent: "送付済み"
+          accepted: "受注"
+          rejected: "失注"
 
   helpers:
     submit:

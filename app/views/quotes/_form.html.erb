@@ -13,7 +13,10 @@
 
   <div class="mb-3">
     <%= form.label :status, "ステータス", class: "form-label" %>
-    <%= form.text_field :status, class: "form-control" %>
+    <%= form.select :status,
+      Quote.statuses.keys.map { |k| [Quote.human_attribute_name("statuses.#{k}"), k] },
+      {},
+      class: "form-select" %>
   </div>
 
   <div class="mb-3">

@@ -17,7 +17,7 @@
     <% @projects.each do |p| %>
       <tr>
         <td><%= link_to p.name, p, class: "text-decoration-none" %></td>
-        <td><%= p.status %></td>
+        <td><%= p.status_i18n %></td>
         <td><%= p.client&.name %></td>
         <td class="text-end">
           <%= link_to "編集", edit_project_path(p), class: "btn btn-sm btn-outline-secondary" %>

@@ -2,7 +2,12 @@ class Quote < ApplicationRecord
   belongs_to :project
   belongs_to :user
 
-  enum :status, { draft: 0, sent: 1, accepted: 2, rejected: 3 }, default: :draft
+  enum :status, {
+    draft: 0,
+    sent: 1,
+    accepted: 2,
+    rejected: 3
+  }
 
   before_validation :calculate_amounts
   before_validation :assign_quote_no, on: :create
