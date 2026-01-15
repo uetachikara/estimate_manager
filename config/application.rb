@@ -20,6 +20,8 @@ Bundler.require(*Rails.groups)
 
 module EstimateManager
   class Application < Rails::Application
+    config.i18n.default_locale = :ja
+    config.time_zone = "Tokyo"
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.1
 

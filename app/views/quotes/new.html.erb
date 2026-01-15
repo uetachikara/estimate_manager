@@ -1,11 +1,6 @@
-<% content_for :title, "New quote" %>
-
-<h1>New quote</h1>
-
-<%= render "form", quote: @quote %>
-
-<br>
-
-<div>
-  <%= link_to "Back to quotes", quotes_path %>
+<div class="card">
+  <div class="card-body">
+    <h1 class="h5 mb-3">見積：新規登録</h1>
+    <%= render "form", quote: @quote %>
+  </div>
 </div>

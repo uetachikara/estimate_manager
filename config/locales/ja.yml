@@ -1,0 +1,47 @@
+ja:
+  activerecord:
+    models:
+      client: 取引先
+      project: 案件
+      quote: 見積
+    attributes:
+      client:
+        name: 取引先名
+        contact_name: 担当者
+        phone: 電話
+        email: メール
+      project:
+        name: 案件名
+        status: ステータス
+        note: メモ
+        client: 取引先
+      quote:
+        quote_no: 見積番号
+        status: ステータス
+        subtotal: 小計（円）
+        tax: 消費税
+        total: 合計
+        issued_on: 発行日
+        note: 備考
+        project: 案件
+
+  helpers:
+    submit:
+      create: "登録"
+      update: "更新"
+
+  notices:
+    client:
+      created: "取引先を登録しました。"
+      updated: "取引先を更新しました。"
+      destroyed: "取引先を削除しました。"
+
+    project:
+      created: "案件を登録しました。"
+      updated: "案件を更新しました。"
+      destroyed: "案件を削除しました。"
+
+    quote:
+      created: "見積を登録しました。"
+      updated: "見積を更新しました。"
+      destroyed: "見積を削除しました。"

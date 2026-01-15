@@ -1,16 +1,30 @@
-<p style="color: green"><%= notice %></p>
-
-<% content_for :title, "Quotes" %>
-
-<h1>Quotes</h1>
-
-<div id="quotes">
-  <% @quotes.each do |quote| %>
-    <%= render quote %>
-    <p>
-      <%= link_to "Show this quote", quote %>
-    </p>
-  <% end %>
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h1 class="h4 mb-0">見積一覧</h1>
+  <%= link_to "新規登録", new_quote_path, class: "btn btn-primary" %>
 </div>
 
-<%= link_to "New quote", new_quote_path %>
+<table class="table table-striped table-hover table-sm align-middle">
+  <thead>
+    <tr>
+      <th>見積番号</th>
+      <th>案件</th>
+      <th>ステータス</th>
+      <th class="text-end">合計</th>
+      <th class="text-end"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @quotes.each do |q| %>
+      <tr>
+        <td><%= link_to q.quote_no, q, class: "text-decoration-none" %></td>
+        <td><%= q.project&.name %></td>
+        <td><%= q.status %></td>
+        <td class="text-end"><%= q.total %></td>
+        <td class="text-end">
+          <%= link_to "編集", edit_quote_path(q), class: "btn btn-sm btn-outline-secondary" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
