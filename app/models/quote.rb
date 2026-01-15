@@ -9,6 +9,10 @@ class Quote < ApplicationRecord
     rejected: 3
   }
 
+  def status_i18n
+    I18n.t("activerecord.attributes.quote.statuses.#{status}")
+  end
+
   before_validation :calculate_amounts
   before_validation :assign_quote_no, on: :create
 

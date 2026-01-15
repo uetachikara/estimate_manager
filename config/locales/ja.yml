@@ -1,33 +1,36 @@
 ja:
   activerecord:
     models:
-      client: 取引先
-      project: 案件
-      quote: 見積
+      client: "取引先"
+      project: "案件"
+      quote: "見積"
+
     attributes:
       client:
-        name: 取引先名
-        contact_name: 担当者
-        phone: 電話
-        email: メール
+        name: "取引先名"
+        contact_name: "担当者"
+        phone: "電話"
+        email: "メール"
+
       project:
-        name: 案件名
-        status: ステータス
-        note: メモ
-        client: 取引先
+        name: "案件名"
+        status: "ステータス"
+        note: "メモ"
+        client: "取引先"
         statuses:
           lead: "リード"
           active: "進行中"
           closed: "完了"
+
       quote:
-        quote_no: 見積番号
-        status: ステータス
-        subtotal: 小計（円）
-        tax: 消費税
-        total: 合計
-        issued_on: 発行日
-        note: 備考
-        project: 案件
+        quote_no: "見積番号"
+        status: "ステータス"
+        subtotal: "小計（円）"
+        tax: "消費税"
+        total: "合計"
+        issued_on: "発行日"
+        note: "備考"
+        project: "案件"
         statuses:
           draft: "下書き"
           sent: "送付済み"
