@@ -9,8 +9,21 @@ class Quote < ApplicationRecord
     rejected: 3
   }
 
-  def status_i18n
+  def status_label
     I18n.t("activerecord.attributes.quote.statuses.#{status}")
+  end
+  
+  def status_badge_class
+    case status
+    when "draft"
+      "bg-secondary"
+    when "sent"
+      "bg-info"
+    when "accepted"
+      "bg-success"
+    when "rejected"
+      "bg-danger"
+    end
   end
 
   before_validation :calculate_amounts

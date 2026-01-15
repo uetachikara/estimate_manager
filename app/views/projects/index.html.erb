@@ -17,7 +17,11 @@
     <% @projects.each do |p| %>
       <tr>
         <td><%= link_to p.name, p, class: "text-decoration-none" %></td>
-        <td><%= I18n.t("activerecord.attributes.project.statuses.#{p.status}") %></td>
+        <td>
+          <span class="badge <%= p.status_badge_class %>">
+            <%= p.status_label %>
+          </span>
+        </td>
         <td><%= p.client&.name %></td>
         <td class="text-end">
           <%= link_to "編集", edit_project_path(p), class: "btn btn-sm btn-outline-secondary" %>

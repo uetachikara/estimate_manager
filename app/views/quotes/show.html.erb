@@ -1,8 +1,35 @@
-<%= render @quote %>
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h1 class="h5 mb-0">見積詳細</h1>
+      <span class="badge <%= @quote.status_badge_class %>">
+        <%= @quote.status_label %>
+      </span>
+    </div>
 
-<div>
-  <%= link_to "Edit this quote", edit_quote_path(@quote) %> |
-  <%= link_to "Back to quotes", quotes_path %>
+    <dl class="row mb-0">
+      <dt class="col-sm-3">見積番号</dt>
+      <dd class="col-sm-9"><%= @quote.quote_no %></dd>
 
-  <%= button_to "Destroy this quote", @quote, method: :delete %>
+      <dt class="col-sm-3">案件</dt>
+      <dd class="col-sm-9"><%= @quote.project&.name %></dd>
+
+      <dt class="col-sm-3">小計</dt>
+      <dd class="col-sm-9"><%= number_to_currency(@quote.subtotal, unit: "¥") %></dd>
+
+      <dt class="col-sm-3">消費税</dt>
+      <dd class="col-sm-9"><%= number_to_currency(@quote.tax, unit: "¥") %></dd>
+
+      <dt class="col-sm-3">合計</dt>
+      <dd class="col-sm-9 fw-bold"><%= number_to_currency(@quote.total, unit: "¥") %></dd>
+
+      <dt class="col-sm-3">備考</dt>
+      <dd class="col-sm-9"><%= simple_format(@quote.note) %></dd>
+    </dl>
+  </div>
+
+  <div class="card-footer d-flex gap-2">
+    <%= link_to "編集", edit_quote_path(@quote), class: "btn btn-outline-primary btn-sm" %>
+    <%= link_to "戻る", quotes_path, class: "btn btn-outline-secondary btn-sm" %>
+  </div>
 </div>
