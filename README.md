@@ -114,8 +114,5 @@ N+1 を避けた実装
 作者
 GitHub: https://github.com/uetachikara
 
-system spec による E2E テスト
-
-N+1 を避けたクエリ設計
 
 
