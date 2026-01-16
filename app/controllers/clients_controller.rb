@@ -3,7 +3,11 @@ class ClientsController < ApplicationController
 
   # GET /clients or /clients.json
   def index
-    @clients = current_user.clients.order(created_at: :desc)
+    @clients = current_user.clients
+                           .left_joins(:projects)
+                           .select("clients.*, COUNT(projects.id) AS projects_count")
+                           .group("clients.id")
+                           .order(created_at: :desc)
   end
 
   # GET /clients/1 or /clients/1.json
