@@ -1,5 +1,6 @@
 class QuotesController < ApplicationController
   before_action :set_quote, only: %i[ show edit update destroy ]
+  before_action :set_projects, only: %i[new create edit update]
 
   def index
     @quotes = current_user.quotes.includes(:project).order(created_at: :desc)
@@ -9,8 +10,8 @@ class QuotesController < ApplicationController
   end
 
   def new
-    @quote = current_user.quotes.new
-    @projects = current_user.projects
+    @quote = Quote.new
+    @quote.quote_items.build
   end
 
   def edit
@@ -47,8 +48,25 @@ class QuotesController < ApplicationController
     @quote = current_user.quotes.find(params.expect(:id))
   end
 
-  def quote_params
-    params.require(:quote).permit(:status, :subtotal, :issued_on, :note, :project_id)
+  def set_projects
+    @projects = current_user.projects.order(created_at: :desc)
   end
+
+  def quote_params
+    params.require(:quote).permit(
+      :status,
+      :project_id,
+      :note,
+      :issued_on,
+      quote_items_attributes: [
+        :id,
+        :description,
+        :quantity,
+        :unit_price,
+        :_destroy
+      ]
+    )
+  end
+
 end
 

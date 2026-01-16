@@ -1,6 +1,11 @@
 class Quote < ApplicationRecord
   belongs_to :project
   belongs_to :user
+  has_many :quote_items, dependent: :destroy
+
+  accepts_nested_attributes_for :quote_items, allow_destroy: true
+
+  before_validation :calculate_totals
 
   enum :status, {
     draft: 0,
@@ -43,5 +48,11 @@ class Quote < ApplicationRecord
 
   def assign_quote_no
     self.quote_no ||= "Q-#{Time.current.strftime('%Y%m%d')}-#{SecureRandom.hex(2).upcase}"
+  end
+
+  def calculate_totals
+    self.subtotal = quote_items.sum { |i| i.quantity.to_i * i.unit_price.to_i }
+    self.tax = (subtotal * 0.1).floor
+    self.total = subtotal + tax
   end
 end

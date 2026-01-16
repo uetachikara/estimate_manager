@@ -26,6 +26,35 @@
       <dt class="col-sm-3">備考</dt>
       <dd class="col-sm-9"><%= simple_format(@quote.note) %></dd>
     </dl>
+    <hr class="my-4">
+
+<h6 class="mb-3">見積明細</h6>
+
+<table class="table table-sm align-middle">
+  <thead class="table-light">
+    <tr>
+      <th>内容</th>
+      <th class="text-end">数量</th>
+      <th class="text-end">単価</th>
+      <th class="text-end">小計</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @quote.quote_items.each do |item| %>
+      <tr>
+        <td><%= item.description %></td>
+        <td class="text-end"><%= item.quantity %></td>
+        <td class="text-end">
+          <%= number_to_currency(item.unit_price, unit: "¥") %>
+        </td>
+        <td class="text-end">
+          <%= number_to_currency(item.quantity * item.unit_price, unit: "¥") %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
   </div>
 
   <div class="card-footer d-flex gap-2">

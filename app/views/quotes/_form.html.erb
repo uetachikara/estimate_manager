@@ -19,11 +19,24 @@
         class: "form-select" %>
   </div>
 
-  <div class="mb-3">
-    <%= form.label :subtotal, "小計（円）", class: "form-label" %>
-    <%= form.number_field :subtotal, class: "form-control", min: 0, step: 1 %>
-  </div>
+  <hr>
 
+  <h6>見積明細</h6>
+
+  <%= form.fields_for :quote_items do |item_form| %>
+    <div class="row g-2 mb-2">
+      <div class="col-md-6">
+        <%= item_form.text_field :description, placeholder: "内容", class: "form-control" %>
+      </div>
+      <div class="col-md-2">
+        <%= item_form.number_field :quantity, placeholder: "数量", class: "form-control" %>
+      </div>
+      <div class="col-md-3">
+        <%= item_form.number_field :unit_price, placeholder: "単価", class: "form-control" %>
+      </div>
+    </div>
+  <% end %>
+  
   <div class="mb-3">
     <%= form.label :issued_on, "発行日", class: "form-label" %>
     <%= form.date_field :issued_on, class: "form-control" %>

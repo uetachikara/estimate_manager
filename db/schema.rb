@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_15_101200) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_16_135210) do
   create_table "clients", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "contact_name"
     t.datetime "created_at", null: false
@@ -32,6 +32,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_15_101200) do
     t.bigint "user_id", null: false
     t.index ["client_id"], name: "index_projects_on_client_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
+  create_table "quote_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "description"
+    t.integer "quantity"
+    t.bigint "quote_id", null: false
+    t.integer "unit_price"
+    t.datetime "updated_at", null: false
+    t.index ["quote_id"], name: "index_quote_items_on_quote_id"
   end
 
   create_table "quotes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -66,6 +76,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_15_101200) do
   add_foreign_key "clients", "users"
   add_foreign_key "projects", "clients"
   add_foreign_key "projects", "users"
+  add_foreign_key "quote_items", "quotes"
   add_foreign_key "quotes", "projects"
   add_foreign_key "quotes", "users"
 end
