@@ -20,23 +20,28 @@
   </div>
 
   <hr>
-
   <h6>見積明細</h6>
 
-  <%= form.fields_for :quote_items do |item_form| %>
-    <div class="row g-2 mb-2">
-      <div class="col-md-6">
-        <%= item_form.text_field :description, placeholder: "内容", class: "form-control" %>
-      </div>
-      <div class="col-md-2">
-        <%= item_form.number_field :quantity, placeholder: "数量", class: "form-control" %>
-      </div>
-      <div class="col-md-3">
-        <%= item_form.number_field :unit_price, placeholder: "単価", class: "form-control" %>
-      </div>
+  <div data-controller="quote-items">
+    <div data-quote-items-target="list">
+      <%= form.fields_for :quote_items do |f| %>
+        <%= render "quote_item_fields", f: f %>
+      <% end %>
     </div>
-  <% end %>
-  
+
+    <template data-quote-items-target="template">
+      <%= form.fields_for :quote_items, QuoteItem.new, child_index: "NEW_RECORD" do |f| %>
+        <%= render "quote_item_fields", f: f %>
+      <% end %>
+    </template>
+
+    <button type="button"
+            class="btn btn-outline-primary btn-sm mt-2"
+            data-action="quote-items#add">
+      ＋ 明細を追加
+    </button>
+  </div>
+
   <div class="mb-3">
     <%= form.label :issued_on, "発行日", class: "form-label" %>
     <%= form.date_field :issued_on, class: "form-control" %>
