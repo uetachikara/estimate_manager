@@ -1,118 +1,117 @@
-# README
-# Estimate Manager（見積・案件管理アプリ）
+# Estimate Manager
 
-Estimate Manager は、**取引先・案件・見積を一元管理する業務向けWebアプリケーション**です。  
-実務での利用を想定し、UI・設計・テストまで含めて実装しています。
-
----
-
-## アプリ概要
-
-- 取引先（Client）管理
-- 案件（Project）管理
-- 見積（Quote）管理
-- ステータス管理（enum + 日本語表示）
-- ユーザー認証（Devise）
-- system spec による E2E テスト
+取引先・案件・見積を一元管理できる **見積管理Webアプリケーション**です。  
+実務での利用を想定し、設計・UI・テストまで含めて実装しています。
 
 ---
 
-## 使用技術
+## 📌 概要
 
-- Ruby 3.3
-- Ruby on Rails 8.1
-- MySQL
-- Bootstrap 5
-- Devise
-- RSpec / Capybara
+Estimate Manager は、以下の業務フローをシンプルに管理できます。
+
+- 取引先を登録する
+- 取引先に紐づく案件を管理する
+- 案件ごとに見積を作成・管理する
+- 見積明細を複数行入力し、金額を自動計算する
 
 ---
 
-## 主な機能
+## ✨ 主な機能
 
-### 認証機能
-- ログイン / ログアウト
-- 新規ユーザー登録
+### 🔐 認証機能
+- ユーザー登録 / ログイン / ログアウト
 - パスワード再設定
-- 業務アプリを意識したログイン画面UI
+- ユーザーごとのデータ分離
 
-### 取引先管理
+### 🏢 取引先管理
 - 取引先の登録 / 編集 / 削除
-- 一覧画面で案件数を表示
-- N+1 を避けたクエリ設計
+- 一覧・詳細表示
+- 案件との関連付け
 
-### 案件管理
-- 案件の登録 / 編集
-- ステータス管理（リード / 進行中 / 完了）
-- ステータスは **色付きバッジ + 日本語表示**
+### 📁 案件管理
+- 案件の登録 / 編集 / 削除
+- ステータス管理（日本語表示）
+  - リード
+  - 進行中
+  - 完了
+- ステータスは色付きバッジで表示
 
-### 見積管理
-- 見積の登録 / 編集
-- ステータス管理（下書き / 送付済み / 受注 / 失注）
-- 金額を業務向け表示形式で表示
+### 🧾 見積管理
+- 見積の登録 / 編集 / 削除
+- 見積番号の管理
+- ステータス管理
+  - 下書き
+  - 送付済み
+  - 受注
+  - 失注
+- 見積明細を複数行登録可能
+  - 内容
+  - 数量
+  - 単価
+- 小計・消費税・合計金額を自動計算
+- Stimulus による明細の動的追加（＋ボタン）
 
 ---
 
-## テスト
+## 🎨 UI / UX
+- Bootstrap を利用したシンプルで業務向けのUI
+- 日本語UI（I18n対応）
+- 入力・確認のしやすさを重視した画面構成
+- ステータスの視認性を高めるバッジ表示
 
-### System Spec（E2Eテスト）
+---
 
-ユーザー操作による一連の業務フローを system spec で検証しています。
+## 🛠 技術スタック
 
-bundle exec rspec spec/system/estimate_flow_spec.rb
-テスト内容
-ユーザーがログインできる
+| 分類 | 技術 |
+|---|---|
+| Backend | Ruby 3.3 / Ruby on Rails 8.1 |
+| Database | MySQL |
+| 認証 | Devise |
+| Frontend | ERB / Bootstrap 5 |
+| JavaScript | Hotwire（Turbo / Stimulus） |
+| テスト | RSpec（System Spec） |
+| その他 | Importmap / I18n |
 
-取引先を作成できる
+---
 
-案件を作成できる
+## 🗂 データ構成
 
-見積を作成できる
+- User
+  - has_many :clients
+  - has_many :projects
+  - has_many :quotes
 
-セットアップ手順
-bash
-コードをコピーする
+- Client（取引先）
+  - belongs_to :user
+  - has_many :projects
+
+- Project（案件）
+  - belongs_to :client
+  - belongs_to :user
+  - has_many :quotes
+  - enum :status
+
+- Quote（見積）
+  - belongs_to :project
+  - belongs_to :user
+  - has_many :quote_items
+  - enum :status
+
+- QuoteItem（見積明細）
+  - belongs_to :quote
+  - 金額は Quote モデル側で集計
+
+---
+
+## 🚀 セットアップ
+
+```bash
 git clone https://github.com/uetachikara/estimate_manager.git
 cd estimate_manager
 
 bundle install
-rails db:create db:migrate
+rails db:create
+rails db:migrate
+
 bin/dev
-ブラウザで以下にアクセスしてください。
-
-text
-コードをコピーする
-http://localhost:3000
-設計・実装で意識した点
-業務アプリとしての視認性
-
-ステータスの色分け
-
-一覧・詳細画面の役割を明確化
-
-保守性
-
-enum + I18n による日本語化
-
-表示ロジックは model に集約
-
-品質
-
-system spec による E2E テスト
-
-N+1 を避けた実装
-
-今後の改善案
-権限管理（管理者 / 一般ユーザー）
-
-見積の PDF 出力
-
-検索・絞り込み機能
-
-本番環境へのデプロイ
-
-作者
-GitHub: https://github.com/uetachikara
-
-
-
