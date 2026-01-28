@@ -114,4 +114,4 @@ bundle install
 rails db:create
 rails db:migrate
 
-bin/dev
+rails s
